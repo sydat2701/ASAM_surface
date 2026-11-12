@@ -159,18 +159,18 @@ mean (SD) over folds:  mae 2.14 (0.17)   r 0.67 (0.05)
 
 Retraining with `train.py` from this repository gives MAE 2.26 (0.14), R 0.62 (0.05).
 
-With the released ADNI weights, the expected output is:
+With the released ADNI weights (retrained with `train.py` from this repository), the expected output is:
 
 ```
-fold 0: bacc=0.6595, auc=0.6333, f1=0.7027, pre=0.8125, sen=0.6190
-fold 1: bacc=0.6214, auc=0.6631, f1=0.7013, pre=0.7714, sen=0.6429
-fold 2: bacc=0.6500, auc=0.6738, f1=0.6269, pre=0.8400, sen=0.5000
-fold 3: bacc=0.6034, auc=0.6562, f1=0.7089, pre=0.7368, sen=0.6829
-fold 4: bacc=0.6183, auc=0.6927, f1=0.6377, pre=0.7857, sen=0.5366
-mean (SD) over folds [%]:  bacc 63.05 (2.09)   auc 66.38 (1.96)
+fold 0: bacc=0.6595, auc=0.6226, f1=0.7027, pre=0.8125, sen=0.6190
+fold 1: bacc=0.6774, auc=0.6440, f1=0.5667, pre=0.9444, sen=0.4048
+fold 2: bacc=0.7095, auc=0.6405, f1=0.7222, pre=0.8667, sen=0.6190
+fold 3: bacc=0.6754, auc=0.6051, f1=0.7595, pre=0.7895, sen=0.7317
+fold 4: bacc=0.7049, auc=0.7171, f1=0.7143, pre=0.8621, sen=0.6098
+mean (SD) over folds [%]:  bacc 68.53 (1.90)   auc 64.59 (3.82)
 ```
 
-Note: in the original experiments the ADNI checkpoints were selected while evaluating with the training-time input noise (std 1) still active, so the values in the paper are noisy-evaluation scores. `evaluate.py` is deterministic (no noise), which gives the lower numbers above. Retraining with `train.py` from this repository (deterministic validation) gives BACC 68.53 (1.90), AUC 64.59 (3.82).
+Note: in the original experiments, the ADNI checkpoints were selected and scored while the training-time input noise (std 1) was still active during validation, so the ADNI values in the paper are noisy-evaluation scores. `evaluate.py` and the validation in `train.py` are deterministic (no noise). Evaluated this way, the original paper checkpoints give BACC 63.05 (2.09), AUC 66.38 (1.96); the released retrained checkpoints give the numbers above.
 
 Use `--save_predictions preds.csv` to write the per-subject outputs.
 
