@@ -1,0 +1,12 @@
+# Tested environment (Python 3.10, CUDA 12.x, NVIDIA H100). Install PyTorch first, then the rest:
+#   pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt --no-build-isolation
+torch==2.5.1
+causal-conv1d==1.2.0.post2
+mamba-ssm==2.2.2
+einops==0.8.2
+numpy==1.24.4
+pandas==2.2.1
+scipy==1.13.0
+scikit-learn==1.4.2
+tqdm==4.66.4
