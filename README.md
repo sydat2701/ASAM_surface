@@ -130,13 +130,18 @@ The imaging data must be obtained from [ADNI](https://adni.loni.usc.edu) and the
 
 ## Pretrained weights
 
-The five fold models of each task are attached to the [v1.0 release](https://github.com/sydat2701/ASAM_surface/releases/tag/v1.0). Each `fold{k}.pth` is evaluated on the held-out subjects of fold k.
+The five fold models of each task are available on [Google Drive](https://drive.google.com/drive/folders/1jZgArjCP7TYGdujF8CIg54QQdxF2XOip?usp=sharing). Each `fold{k}.pth` is evaluated on the held-out subjects of fold k.
+
+| File | Content | SHA-256 |
+|---|---|---|
+| `asam_adni_cn_mci.zip` | ADNI CN vs. MCI, 5 fold models (retrained with this repository) | `c725f7acbdbd7c99ef8c3150ff06b4bdfc4af6de05b62c5781380785a8100383` |
+| `asam_hbn_age.zip` | HBN brain age, 5 fold models (paper checkpoints) | `cbf081050f9783dd6707857cc0bdbf72e12ceb35f63502c07e047fea125ee4ce` |
+| `asam_adni_cn_mci_original.zip` | ADNI CN vs. MCI, original paper checkpoints (see the note under Evaluation) | `8b1389d4ec199339fb9087a88db245eab6724cde696f741bc099580b2e3d5383` |
+
+Download the zips into `weights/` (in the browser, or with `pip install gdown && gdown --folder <link above> -O weights`), then:
 
 ```bash
-mkdir -p weights
-wget -P weights https://github.com/sydat2701/ASAM_surface/releases/download/v1.0/asam_adni_cn_mci.zip
-wget -P weights https://github.com/sydat2701/ASAM_surface/releases/download/v1.0/asam_hbn_age.zip
-unzip -d weights weights/asam_adni_cn_mci.zip && unzip -d weights weights/asam_hbn_age.zip
+cd weights && unzip asam_adni_cn_mci.zip && unzip asam_hbn_age.zip && cd ..
 ```
 
 ## Evaluation
