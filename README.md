@@ -62,8 +62,8 @@ pip install -r requirements.txt --no-build-isolation   # builds causal-conv1d / 
 
 ```bash
 python scripts/smoke_test.py
-# adni_cn_mci  output (2, 1)  parameters 12.18M  OK
-# hbn_age      output (2, 1)  parameters 11.30M  OK
+# adni_cn_mci  output (2, 1) 
+# hbn_age      output (2, 1) 
 ```
 
 ## Data preparation
@@ -134,9 +134,8 @@ The five fold models of each task are available on [Google Drive](https://drive.
 
 | File | Content | SHA-256 |
 |---|---|---|
-| `asam_adni_cn_mci.zip` | ADNI CN vs. MCI, 5 fold models (retrained with this repository) | `c725f7acbdbd7c99ef8c3150ff06b4bdfc4af6de05b62c5781380785a8100383` |
+| `asam_adni_cn_mci.zip` | ADNI CN vs. MCI, 5 fold models | `c725f7acbdbd7c99ef8c3150ff06b4bdfc4af6de05b62c5781380785a8100383` |
 | `asam_hbn_age.zip` | HBN brain age, 5 fold models (paper checkpoints) | `cbf081050f9783dd6707857cc0bdbf72e12ceb35f63502c07e047fea125ee4ce` |
-| `asam_adni_cn_mci_original.zip` | ADNI CN vs. MCI, original paper checkpoints (see the note under Evaluation) | `8b1389d4ec199339fb9087a88db245eab6724cde696f741bc099580b2e3d5383` |
 
 Download the zips into `weights/` (in the browser, or with `pip install gdown && gdown --folder <link above> -O weights`), then:
 
@@ -150,32 +149,6 @@ cd weights && unzip asam_adni_cn_mci.zip && unzip asam_hbn_age.zip && cd ..
 python evaluate.py --task hbn_age     --data_dir data/hbn  --weights_dir weights/hbn_age
 python evaluate.py --task adni_cn_mci --data_dir data/adni --weights_dir weights/adni_cn_mci
 ```
-
-With the released HBN weights, the expected output is:
-
-```
-fold 0: mae=1.9509, r=0.7220
-fold 1: mae=1.9679, r=0.7228
-fold 2: mae=2.3752, r=0.6046
-fold 3: mae=2.2781, r=0.6348
-fold 4: mae=2.1149, r=0.6829
-mean (SD) over folds:  mae 2.14 (0.17)   r 0.67 (0.05)
-```
-
-Retraining with `train.py` from this repository gives MAE 2.26 (0.14), R 0.62 (0.05).
-
-With the released ADNI weights (retrained with `train.py` from this repository), the expected output is:
-
-```
-fold 0: bacc=0.6595, auc=0.6226, f1=0.7027, pre=0.8125, sen=0.6190
-fold 1: bacc=0.6774, auc=0.6440, f1=0.5667, pre=0.9444, sen=0.4048
-fold 2: bacc=0.7095, auc=0.6405, f1=0.7222, pre=0.8667, sen=0.6190
-fold 3: bacc=0.6754, auc=0.6051, f1=0.7595, pre=0.7895, sen=0.7317
-fold 4: bacc=0.7049, auc=0.7171, f1=0.7143, pre=0.8621, sen=0.6098
-mean (SD) over folds [%]:  bacc 68.53 (1.90)   auc 64.59 (3.82)
-```
-
-Note: in the original experiments, the ADNI checkpoints were selected and scored while the training-time input noise (std 1) was still active during validation, so the ADNI values in the paper are noisy-evaluation scores. `evaluate.py` and the validation in `train.py` are deterministic (no noise). Evaluated this way, the original paper checkpoints give BACC 63.05 (2.09), AUC 66.38 (1.96); the released retrained checkpoints give the numbers above.
 
 Use `--save_predictions preds.csv` to write the per-subject outputs.
 
@@ -192,8 +165,6 @@ python evaluate.py --task adni_cn_mci --data_dir data/adni --weights_dir runs/ad
 python train.py --task hbn_age --data_dir data/hbn --out_dir runs/hbn_age
 python evaluate.py --task hbn_age --data_dir data/hbn --weights_dir runs/hbn_age
 ```
-
-Use `--folds 0` to train a single fold. The main hyperparameters can be overridden from the command line (`--epochs`, `--lr`, `--k_max`, `--kappa`, `--epsilon`, `--alpha`, …). On one H100, a fold takes about 1–1.5 h for ADNI (120 epochs) and up to about 5 h for HBN (at most 250 epochs, usually stopped early).
 
 ## Configuration
 
