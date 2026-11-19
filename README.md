@@ -216,11 +216,12 @@ If you use this code, please cite our paper. The entry is provisional; the DOI w
 
 ```bibtex
 @article{tran2026asam,
-  title   = {{ASAM}: Adaptive Cortical Surface Representation via Dynamic Local Aggregation and Hybrid Attention--Mamba Global Modeling},
-  author  = {Tran, Sy Dat and Yoon, Hye Jin and Gahm, Jin Kyu and {Alzheimer's Disease Neuroimaging Initiative}},
-  journal = {Medical Image Analysis},
-  year    = {2026},
-  note    = {In press}
+  title={ASAM: Adaptive cortical surface representation via dynamic local aggregation and hybrid Attention--Mamba global modeling},
+  author={Tran, Sy Dat and Yoon, Hye Jin and Gahm, Jin Kyu and Alzheimer’s Disease Neuroimaging Initiative (ADNI and others},
+  journal={Medical Image Analysis},
+  pages={104394},
+  year={2026},
+  publisher={Elsevier}
 }
 ```
 
